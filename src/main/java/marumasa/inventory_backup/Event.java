@@ -1,7 +1,6 @@
 package marumasa.inventory_backup;
 
 import marumasa.inventory_backup.command.Restore;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,7 +9,6 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,11 +21,9 @@ public class Event implements Listener {
 
 
     private final Config cfg;
-    private final Minecraft mc;
 
-    public Event(Config config, Minecraft minecraft) {
+    public Event(Config config) {
         cfg = config;
-        mc = minecraft;
     }
 
     @EventHandler
