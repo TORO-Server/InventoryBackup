@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static marumasa.inventory_backup.Utils.*;
+import static marumasa.inventory_backup.Utils.allNull;
+import static marumasa.inventory_backup.Utils.cloneContents;
 
 public class Event implements Listener {
 
