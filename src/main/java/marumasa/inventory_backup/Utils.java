@@ -1,6 +1,4 @@
-package marumasa.inventorybackup;
-
-import org.bukkit.inventory.ItemStack;
+package marumasa.inventory_backup;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,5 +11,13 @@ public class Utils {
         return Arrays.stream(array)
                 // 要素がnullでない場合はfalseを返す
                 .noneMatch(Objects::nonNull);
+    }
+
+    public static Integer toInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

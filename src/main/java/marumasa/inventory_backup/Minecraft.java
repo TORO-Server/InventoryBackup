@@ -1,11 +1,11 @@
-package marumasa.inventorybackup;
+package marumasa.inventory_backup;
 
-import marumasa.inventorybackup.command.Restore;
+import marumasa.inventory_backup.command.Restore;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Minecraft extends JavaPlugin {
 
-    public static final String PluginName = "InventoryBackup";
+    public static final String PluginName = "";
 
     @Override
     public void onEnable() {

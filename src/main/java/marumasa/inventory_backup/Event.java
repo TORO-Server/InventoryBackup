@@ -1,9 +1,6 @@
-package marumasa.inventorybackup;
+package marumasa.inventory_backup;
 
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import marumasa.inventory_backup.command.Restore;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +11,7 @@ import org.bukkit.inventory.PlayerInventory;
 import java.util.HashMap;
 import java.util.Map;
 
-import static marumasa.inventorybackup.Utils.allNull;
+import static marumasa.inventory_backup.Utils.allNull;
 
 public class Event implements Listener {
 
@@ -36,21 +33,16 @@ public class Event implements Listener {
         final HumanEntity player = event.getPlayer();
         // プレイヤーからインベントリ取得
         final PlayerInventory inventory = player.getInventory();
-
         // インベントリからアイテムの配列を取得
         final ItemStack[] itemStacks = inventory.getContents();
 
         // もし何もアイテムを持っていなかったら
         if (allNull(itemStacks) && InventoryBackup.containsKey(player)) {
-
-            player.spigot().sendMessage(text);
-
-            // プレイヤーの持ち物をバックアップから復元
-            inventory.setContents(InventoryBackup.get(player));
+            // インベントリをバックアップから復元するかどうかのメッセージを表示する
+            player.spigot().sendMessage(Restore.generateRestoreMessage(itemStacks, cfg));
         } else {
-            // バックアップに追加
+            // インベントリのアイテムの情報をバックアップに追加
             InventoryBackup.put(player, inventory.getContents().clone());
         }
-
     }
 }

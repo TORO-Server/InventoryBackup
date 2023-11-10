@@ -1,14 +1,14 @@
-package marumasa.inventorybackup;
+package marumasa.inventory_backup;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class Config {
-    public final int test;
+    public final String restore_command;
 
     public Config(final Minecraft plugin) {
         plugin.saveDefaultConfig();
         FileConfiguration config = plugin.getConfig();
 
-        test = config.getInt("test.value");
+        restore_command = config.getString("restore-command");
     }
 }

@@ -1,2 +1,4 @@
 Text:
   rest
+
+restore-command: "/inventorybackup:restore %d"

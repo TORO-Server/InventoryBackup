@@ -1,4 +1,15 @@
 name: InventoryBackup
 version: '${version}'
-main: marumasa.inventorybackup.Minecraft
+main: marumasa.inventory_backup.Minecraft
 api-version: '1.19'
+
+commands:
+  restore:
+    description: インベントリを復元するコマンド
+    permission-message: インベントリを復元する権限がありません。
+    permission: inventory_backup.restore
+
+permissions:
+  inventory_backup.restore:
+    description: インベントリの復元を許可する権限
+    default: true
