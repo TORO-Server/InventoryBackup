@@ -52,8 +52,8 @@ public class Restore implements CommandExecutor {
 
         ItemStacksLink.add(itemStacks);
 
-        TextComponent text = new TextComponent("あなたのインベントリにアイテムがありません。\nこのメッセージをクリックするとインベントリを復元できます。");
-        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("インベントリを復元する。")));
+        TextComponent text = new TextComponent(cfg.chat_text);
+        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(cfg.hover_text)));
         text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, RestoreCommand(cfg, hashcode)));
 
         return text;
