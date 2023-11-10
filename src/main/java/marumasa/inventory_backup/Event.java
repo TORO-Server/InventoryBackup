@@ -19,7 +19,7 @@ import static marumasa.inventory_backup.Utils.cloneContents;
 
 public class Event implements Listener {
 
-    private static final Map<HumanEntity, ItemStack[]> InventoryBackup = new HashMap<>();
+    private static final Map<HumanEntity, ItemStack[]> InventoryRecording = new HashMap<>();
 
 
     private final Config cfg;
@@ -40,13 +40,13 @@ public class Event implements Listener {
         final ItemStack[] itemStacks = inventory.getContents();
 
         // もし何もアイテムを持っていなかったら
-        if (allNull(itemStacks) && InventoryBackup.containsKey(player)) {
+        if (allNull(itemStacks) && InventoryRecording.containsKey(player)) {
             // インベントリをバックアップから復元するかどうかのメッセージを表示する
-            player.spigot().sendMessage(Restore.generateRestoreMessage(InventoryBackup.get(player), cfg));
-        } else {
-            // インベントリのアイテムの情報をバックアップに追加
-            InventoryBackup.put(player, cloneContents(itemStacks));
+            player.spigot().sendMessage(Restore.generateRestoreMessage(InventoryRecording.get(player), cfg));
         }
+
+        // インベントリを複製して保存
+        InventoryRecording.put(player, cloneContents(itemStacks));
     }
 
     @EventHandler
@@ -57,8 +57,7 @@ public class Event implements Listener {
         final PlayerInventory inventory = player.getInventory();
         // インベントリからアイテムの配列を取得
         final ItemStack[] itemStacks = inventory.getContents();
-
-        // もしアイテムを持っていたら
-        if (!allNull(itemStacks)) InventoryBackup.put(player, cloneContents(itemStacks));
+        // インベントリを複製して保存
+        InventoryRecording.put(player, cloneContents(itemStacks));
     }
 }
