@@ -1,21 +1,9 @@
 package marumasa.inventorybackup;
 
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Utils {
-    protected static Inventory cloneInventory(Inventory origin) {
-
-        // インベントリ作成
-        final Inventory clone = Bukkit.createInventory(origin.getHolder(), 36);
-
-
-        // 元のインベントリのアイテムをクローンのインベントリにコピー
-        clone.setContents(origin.getContents());
-
-        // 複製されたインベントリを返す
-        return clone;
-    }
 
     // 配列の要素がすべてnullだったらtrueを返すメソッド
     public static boolean allNull(Object[] array) {
