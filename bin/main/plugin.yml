@@ -1,0 +1,4 @@
+name: InventoryBackup
+version: '${version}'
+main: marumasa.inventorybackup.Minecraft
+api-version: '1.19'
