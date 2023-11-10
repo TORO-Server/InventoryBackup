@@ -1,11 +1,9 @@
 package marumasa.inventorybackup;
 
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -30,21 +28,22 @@ public class Event implements Listener {
     @EventHandler
     public void onInventory(InventoryCloseEvent event) {
 
+        // プレイヤー取得
         final HumanEntity player = event.getPlayer();
+        // プレイヤーからインベントリ取得
         final PlayerInventory inventory = player.getInventory();
 
+        // インベントリからアイテムの配列を取得
         final ItemStack[] itemStacks = inventory.getContents();
 
-        if (allNull(itemStacks))
-            player.sendMessage("何も持っていない！！w");
-
+        // もし何もアイテムを持っていなかったら
+        if (allNull(itemStacks)) {
+            // プレイヤーの持ち物をバックアップから復元
+            inventory.setContents(InventoryBackup.get(player));
+        }
 
         // バックアップに追加
         InventoryBackup.put(player, inventory.getContents().clone());
 
-
-        mc.getServer().broadcastMessage(player.getName());
-
-        inventory.setContents(InventoryBackup.get(player));
     }
 }
