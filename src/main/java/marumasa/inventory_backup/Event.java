@@ -39,11 +39,6 @@ public class Event implements Listener {
         // インベントリからアイテムの配列を取得
         final ItemStack[] itemStacks = inventory.getContents();
 
-
-        int hashcode = Arrays.hashCode(itemStacks);
-        Bukkit.broadcastMessage(String.valueOf(hashcode));
-
-
         // もし何もアイテムを持っていなかったら
         if (allNull(itemStacks) && InventoryBackup.containsKey(player)) {
             // インベントリをバックアップから復元するかどうかのメッセージを表示する
