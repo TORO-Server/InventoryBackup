@@ -1,8 +1,6 @@
 package marumasa.inventory_backup.command;
 
 import marumasa.inventory_backup.Config;
-import marumasa.inventory_backup.Minecraft;
-import marumasa.inventory_backup.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -13,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Arrays;
 
 import static marumasa.inventory_backup.Utils.toInt;
 
@@ -21,7 +19,7 @@ public class Restore implements CommandExecutor {
 
 
     public static String RestoreCommand(Config cfg, int hashcode) {
-        return String.format(cfg.restore_command, Minecraft.PluginName, hashcode);
+        return String.format(cfg.restore_command, hashcode);
     }
 
 
