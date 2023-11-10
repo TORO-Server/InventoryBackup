@@ -12,7 +12,7 @@ public final class Minecraft extends JavaPlugin {
         // Config 読み込み
         final Config config = new Config(this);
         // イベント登録
-        getServer().getPluginManager().registerEvents(new Event(config, this), this);
+        getServer().getPluginManager().registerEvents(new Event(config), this);
         // コマンドの処理 登録
         getCommand("restore").setExecutor(new Restore());
 
