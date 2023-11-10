@@ -12,7 +12,7 @@ import org.bukkit.inventory.PlayerInventory;
 import java.util.HashMap;
 import java.util.Map;
 
-import static marumasa.inventorybackup.Utils.cloneInventory;
+import static marumasa.inventorybackup.Utils.allNull;
 
 public class Event implements Listener {
 
@@ -35,8 +35,8 @@ public class Event implements Listener {
 
         final ItemStack[] itemStacks = inventory.getContents();
 
-        for (ItemStack i : itemStacks)
-            player.sendMessage(i.toString());
+        if (allNull(itemStacks))
+            player.sendMessage("何も持っていない！！w");
 
 
         // バックアップに追加
