@@ -8,7 +8,9 @@ import java.util.Objects;
 public class Utils {
 
     // 配列の要素がすべてnullだったらtrueを返すメソッド
+    // 配列自体 null の場合 true を返す
     public static boolean allNull(Object[] array) {
+        if (array == null) return true;
         // streamを使って配列の要素を処理する
         return Arrays.stream(array)
                 // 要素がnullでない場合はfalseを返す

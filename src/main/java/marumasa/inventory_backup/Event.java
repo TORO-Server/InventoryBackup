@@ -39,10 +39,12 @@ public class Event implements Listener {
         // インベントリからアイテムの配列を取得
         final ItemStack[] itemStacks = inventory.getContents();
 
+        ItemStack[] Backup = InventoryRecording.get(player);
+
         // もし何もアイテムを持っていなかったら
-        if (allNull(itemStacks) && InventoryRecording.containsKey(player)) {
+        if (allNull(itemStacks) && !allNull(Backup)) {
             // インベントリをバックアップから復元するかどうかのメッセージを表示する
-            player.spigot().sendMessage(Restore.generateRestoreMessage(InventoryRecording.get(player), cfg));
+            player.spigot().sendMessage(Restore.generateRestoreMessage(Backup, cfg));
         }
 
         // インベントリを複製して保存
