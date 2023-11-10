@@ -1,5 +1,7 @@
 package marumasa.inventorybackup;
 
+import org.bukkit.inventory.ItemStack;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -12,5 +14,4 @@ public class Utils {
                 // 要素がnullでない場合はfalseを返す
                 .noneMatch(Objects::nonNull);
     }
-
 }

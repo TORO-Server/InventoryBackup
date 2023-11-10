@@ -1,5 +1,9 @@
 package marumasa.inventorybackup;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,13 +41,16 @@ public class Event implements Listener {
         final ItemStack[] itemStacks = inventory.getContents();
 
         // もし何もアイテムを持っていなかったら
-        if (allNull(itemStacks)) {
+        if (allNull(itemStacks) && InventoryBackup.containsKey(player)) {
+
+            player.spigot().sendMessage(text);
+
             // プレイヤーの持ち物をバックアップから復元
             inventory.setContents(InventoryBackup.get(player));
+        } else {
+            // バックアップに追加
+            InventoryBackup.put(player, inventory.getContents().clone());
         }
-
-        // バックアップに追加
-        InventoryBackup.put(player, inventory.getContents().clone());
 
     }
 }
