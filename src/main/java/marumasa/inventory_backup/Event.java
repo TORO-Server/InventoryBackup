@@ -7,17 +7,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static marumasa.inventory_backup.Utils.allNull;
-import static marumasa.inventory_backup.Utils.cloneContents;
+import static marumasa.inventory_backup.Utils.*;
 
 public class Event implements Listener {
-
-    private static final Map<HumanEntity, ItemStack[]> InventoryRecording = new HashMap<>();
 
 
     private final Config cfg;
@@ -30,32 +23,28 @@ public class Event implements Listener {
     public void onInventory(InventoryCloseEvent event) {
         // プレイヤー取得
         final HumanEntity player = event.getPlayer();
-        // プレイヤーからインベントリ取得
-        final PlayerInventory inventory = player.getInventory();
-        // インベントリからアイテムの配列を取得
-        final ItemStack[] itemStacks = inventory.getContents();
+        // インベントリマネージャーを作成
+        final InventoryManager manager = new InventoryManager(player);
 
-        ItemStack[] Backup = InventoryRecording.get(player);
-
+        // バックアップされているインベントリのアイテムを取得
+        final ItemStack[] backupContents = manager.loadBackup();
         // もし何もアイテムを持っていなかったら
-        if (allNull(itemStacks) && !allNull(Backup)) {
+        if (allNull(manager.itemStacks) && !allNull(backupContents)) {
             // インベントリをバックアップから復元するかどうかのメッセージを表示する
-            player.spigot().sendMessage(Restore.generateRestoreMessage(Backup, cfg));
+            sendMessage(player, Restore.generateRestoreMessage(backupContents, cfg));
         }
 
-        // インベントリを複製して保存
-        InventoryRecording.put(player, cloneContents(itemStacks));
+        //インベントリをバックアップに保存
+        manager.saveBackup();
     }
 
     @EventHandler
     public void onInventory(InventoryOpenEvent event) {
         // プレイヤー取得
         final HumanEntity player = event.getPlayer();
-        // プレイヤーからインベントリ取得
-        final PlayerInventory inventory = player.getInventory();
-        // インベントリからアイテムの配列を取得
-        final ItemStack[] itemStacks = inventory.getContents();
-        // インベントリを複製して保存
-        InventoryRecording.put(player, cloneContents(itemStacks));
+        // インベントリマネージャーを作成
+        final InventoryManager manager = new InventoryManager(player);
+        // インベントリをバックアップに保存
+        manager.saveBackup();
     }
 }

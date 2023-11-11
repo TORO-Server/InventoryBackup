@@ -17,11 +17,10 @@ import static marumasa.inventory_backup.Utils.toInt;
 
 public class Restore implements CommandExecutor {
 
-
+    // プレイヤーが実行する復元コマンドを生成
     public static String RestoreCommand(Config cfg, int hashcode) {
         return String.format(cfg.restore_command, hashcode);
     }
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -29,6 +28,7 @@ public class Restore implements CommandExecutor {
         return false;
     }
 
+    // プレイヤーが復元コマンドを実行したら、このメソッドが実行される
     private static boolean onCommand(Player sender, String[] args) {
         if (args.length != 1) return false;
 
@@ -46,16 +46,15 @@ public class Restore implements CommandExecutor {
     }
 
     public static TextComponent generateRestoreMessage(ItemStack[] itemStacks, Config cfg) {
-
-
+        // ハッシュコード取得
         int hashcode = Arrays.hashCode(itemStacks);
 
         ItemStacksLink.add(itemStacks);
 
+        // 表示するメッセージを作成してそれを返す
         TextComponent text = new TextComponent(cfg.chat_text);
         text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(cfg.hover_text)));
         text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, RestoreCommand(cfg, hashcode)));
-
         return text;
     }
 }

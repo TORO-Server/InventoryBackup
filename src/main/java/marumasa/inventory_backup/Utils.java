@@ -1,5 +1,7 @@
 package marumasa.inventory_backup;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -40,5 +42,9 @@ public class Utils {
     public static ItemStack cloneItemStack(ItemStack itemStack) {
         if (itemStack == null) return null;
         return itemStack.clone();
+    }
+
+    public static void sendMessage(HumanEntity player, BaseComponent text) {
+        player.spigot().sendMessage(text);
     }
 }
