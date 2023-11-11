@@ -34,7 +34,7 @@ public class Event implements Listener {
             sendMessage(player, Restore.generateRestoreMessage(backupContents, cfg));
         }
 
-        //インベントリをバックアップに保存
+        // インベントリをバックアップに保存
         manager.saveBackup();
     }
 
