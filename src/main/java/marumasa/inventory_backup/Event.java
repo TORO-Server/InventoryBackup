@@ -20,7 +20,7 @@ public class Event implements Listener {
     }
 
     @EventHandler
-    public void onInventory(InventoryCloseEvent event) {
+    public void onInventory(InventoryCloseEvent event) {// プレイヤーがインベントリを閉じると実行される
         // プレイヤー取得
         final HumanEntity player = event.getPlayer();
         // インベントリマネージャーを作成
@@ -39,7 +39,7 @@ public class Event implements Listener {
     }
 
     @EventHandler
-    public void onInventory(InventoryOpenEvent event) {
+    public void onInventory(InventoryOpenEvent event) {// プレイヤーがインベントリを開くと実行される
         // プレイヤー取得
         final HumanEntity player = event.getPlayer();
         // インベントリマネージャーを作成
