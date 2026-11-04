@@ -2,21 +2,26 @@ package marumasa.inventory_backup;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public class Utils {
 
-    // 配列の要素がすべてnullだったらtrueを返すメソッド
+    // 配列にアイテムが 1 つも無ければ true を返すメソッド
     // 配列自体 null の場合 true を返す
-    public static boolean allNull(Object[] array) {
+    public static boolean isEmpty(ItemStack[] array) {
         if (array == null) return true;
-        // streamを使って配列の要素を処理する
-        return Arrays.stream(array)
-                // 要素がnullでない場合はfalseを返す
-                .noneMatch(Objects::nonNull);
+        for (ItemStack itemStack : array) {
+            if (itemStack != null && !itemStack.getType().isAir()) return false;
+        }
+        return true;
+    }
+
+    // プレイヤー自身のインベントリの画面か (容器を開いていないか)
+    public static boolean isOwnInventory(Inventory topInventory) {
+        final InventoryType type = topInventory.getType();
+        return type == InventoryType.CRAFTING || type == InventoryType.CREATIVE;
     }
 
     public static Integer toInt(String str) {
